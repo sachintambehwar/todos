@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 const Register = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -18,13 +19,15 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    passwordRegex.test("password");
+    // passwordRegex.test("password");
     if (passwordRegex.test(password) && passwordRegex.test(confirmPass)) {
       if (password === confirmPass) {
         localStorage.setItem("user", JSON.stringify(userDetails));
         navigate("/");
+        return;
       }
     }
+    toast.error("valid pass required");
   };
   return (
     <div className="flex justify-center flex-col  items-center h-lvh w-full bg-slate-200 ">
